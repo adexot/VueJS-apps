@@ -35,16 +35,43 @@ export default{
     data () {
         return{
             task: {},
-            tasks: []
+            tasks: [],
+            error: {
+                text: false,
+                time: false
+            }
         }
     },
     methods: {
         addTask: function(){
-            this.tasks.push({
-                text: this.task.text,
-                time: this.task.time,
-                checked: false
-            });
+
+            let res = this.validateInput();
+            console.log(res.text);
+            if(typeof res === 'object' ){
+                return false;
+            }
+            else{
+                this.tasks.push({
+                    text: this.task.text,
+                    time: this.task.time,
+                    checked: false
+                });
+            }
+        },
+        validateInput: function(){
+            if(typeof this.task.text === 'undefined' || typeof this.task.time === 'undefined'){
+                if(this.task.text === ''){
+                    this.error.text = true;
+                }
+                else if(this.task.time === ''){
+                    this.error.time = true;
+                }
+                return this.error;
+            }
+            else{
+                return true;
+            }
+            
         }
     },
     computed: {
@@ -79,8 +106,8 @@ export default{
     background-color: #fff;
 }
 .brand{
-    background-color: #fff;
-    color: #3f51b5;
+    background: linear-gradient(360deg, rgba(233,30,99,0.8) 20%, rgba(63,81,181,0.5) 100%);
+    color: #c5cae9;
     padding: 10px 20px;
     border-radius: 4px; 
 }
@@ -115,6 +142,7 @@ input[type="submit"]{
     border-radius: 3px;
     background-color: #e91e63;
     color: #fff;
+    font-weight: bold;
 }
 .task-input{
     margin-top: 20px;
