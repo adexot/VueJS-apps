@@ -1,31 +1,32 @@
 <template>
     <div class="task">
         <div class="box box-input">
-            <h2>Taskify</h2>
+            <h2><span class="brand">Taskify</span></h2>
             <form method="">
-                <div>
+                <div class="task-input">
                     <label>Task</label>
-                    <textarea></textarea>
+                    <textarea v-model="task.text"></textarea>
                 </div>
-                <div>
+                <div class="task-input">
                     <label>Time</label>
-                    <input type="time" />
+                    <input type="time" v-model="task.time"/>
                 </div>
-                <input type="submit" />
+                <input type="submit" value="Add Task" v-on:click="addTask"/>
             </form>
         </div>
         <div class="box box-output">
-            <div v-show="terms" class="list">
-            <h4 class="grey">Search Items</h4>
+            <div class="list">
+            <h4 class="blue">Task list</h4>
             <ul>
                 <li v-for="task in reArray">
-                    <a class="bold red" v-on:click="">x</a>
-                    {{task.text}}
+                    <input type="checkbox" v-model="task.checked"/>
+                    <span :class="{checked: task.checked}">{{task.text}}</span>
                     <small class="text-right">{{task.time}}</small>
                 </li>
             </ul>
             </div>
         </div>
+        <div style="clear:both"></div>
     </div>
 </template>
 <script>
@@ -40,8 +41,9 @@ export default{
     methods: {
         addTask: function(){
             this.tasks.push({
-                text: this.term.text,
-                time: this.term.time
+                text: this.task.text,
+                time: this.task.time,
+                checked: false
             });
         }
     },
@@ -67,25 +69,98 @@ export default{
     float:left;
 }
 .box-input{
+    display: inline-block;
     background-color: #3f51b5;
+    color: #fff;
+    padding-top: 150px;
+    box-sizing: border-box;
 }
 .box-output{
     background-color: #fff;
 }
+.brand{
+    background-color: #fff;
+    color: #3f51b5;
+    padding: 10px 20px;
+    border-radius: 4px; 
+}
 form{
     max-width: 400px;
     display: form;
-    margin: 20px auto;
+    margin: 50px auto;
 }
 label{
     display: block;
     text-align: left;
 }
-input[type="time"],textarea{
-    width: 90%;
+textarea{
+    width: 100%;
     box-sizing: border-box;
+    padding: 20px;
+    border-radius: 3px;
+    border: 0;
+    oveflow: 0;
 }
 input[type="time"]{
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 0;
+}
+input[type="submit"]{
+    margin-top: 20px;
+    padding: 15px 20px;
+    border: 0;
+    border-radius: 3px;
+    background-color: #e91e63;
+    color: #fff;
+}
+.task-input{
+    margin-top: 20px;
+}
+ul{
+    margin: 0;
+    padding: 0 10px;
+}
+ul li{
+    position: relative;
+    width: 100%;
+    text-align: left;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    color: #000;
+}
+ul li:last-child{
+    border-bottom: 0;
+}
+.bold{
+    font-weight: bold;
+}
+.text-left{}
+.text-right{
+   position: absolute;
+   right: 10px;
+}
+.grey{
+    color: #ccc;
+}
+.red{
+    color: #EF9A9A;
+    cursor: pointer;
+}
+.blue{
+    color: #3f51b5;
+}
+small{
+    background-color: #c5cac9;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.checked{
+    text-decoration: line-through;
+    color: #ccc;
 }
 </style>
