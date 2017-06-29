@@ -9,9 +9,9 @@
                 </div>
                 <div class="task-input">
                     <label>Time</label>
-                    <input type="time" v-model="task.time" required/>
+                    <input type="time" v-model="task.time" required>
                 </div>
-                <input type="submit" value="Add Task" v-on:click="addTask"/>
+                <input type="submit" value="Add Task" v-on:click="addTask">
             </form>
         </div>
         <div class="box box-output">
@@ -19,7 +19,7 @@
             <h4 class="blue">Task list</h4>
             <ul>
                 <li v-for="task in reArray">
-                    <input type="checkbox" v-model="task.checked"/>
+                    <input type="checkbox" v-model="task.checked">
                     <span :class="{checked: task.checked}">{{task.text}}</span>
                     <small class="text-right">{{task.time}}</small>
                 </li>
