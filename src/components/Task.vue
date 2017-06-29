@@ -2,14 +2,14 @@
     <div class="task">
         <div class="box box-input">
             <h2><span class="brand">Taskify</span></h2>
-            <form method="">
+            <form>
                 <div class="task-input">
                     <label>Task</label>
-                    <textarea v-model="task.text"></textarea>
+                    <textarea v-model="task.text" required></textarea>
                 </div>
                 <div class="task-input">
                     <label>Time</label>
-                    <input type="time" v-model="task.time"/>
+                    <input type="time" v-model="task.time" required/>
                 </div>
                 <input type="submit" value="Add Task" v-on:click="addTask"/>
             </form>
@@ -32,6 +32,16 @@
 <script>
 export default{
     name: 'task',
+    props: {
+        task: {
+            type: Object,
+            default: function(){
+                return{
+                    
+                };
+            }
+        }
+    },
     data () {
         return{
             task: {},
@@ -46,7 +56,6 @@ export default{
         addTask: function(){
 
             let res = this.validateInput();
-            console.log(res.text);
             if(typeof res === 'object' ){
                 return false;
             }
@@ -86,17 +95,15 @@ export default{
     width: 100%;
     background-color:#fff;
     color: #41B883;
-    display: inline-block;
     color: #aaa;
 }
 .box{
-    display: inline-block;
+    position: relative;
     width: 50%;
     height: 100vh;
-    float:left;
 }
 .box-input{
-    display: inline-block;
+    position: fixed;
     background-color: #3f51b5;
     color: #fff;
     padding-top: 150px;
@@ -104,12 +111,14 @@ export default{
 }
 .box-output{
     background-color: #fff;
+    float: right;
 }
 .brand{
-    background: linear-gradient(360deg, rgba(233,30,99,0.8) 20%, rgba(63,81,181,0.5) 100%);
-    color: #c5cae9;
+    background-color: #fff;
+    color: rgba(233,30,99,1);
     padding: 10px 20px;
     border-radius: 4px; 
+    box-shadow: 2px 1px 3px #ccc;
 }
 form{
     max-width: 400px;
@@ -156,8 +165,9 @@ ul li{
     width: 100%;
     text-align: left;
     list-style: none;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
+    box-shadow: 2px 2px 2px #ccc;
+    padding: 20px 0;
+    margin: 5px;
     color: #000;
 }
 ul li:last-child{

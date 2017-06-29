@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="v-center">
+  <div id="app" class="">
     <task></task>
   </div>
 </template>
@@ -39,14 +39,5 @@ body{
   padding: 0;
   
 }
-.v-center:before{
-  content: " ";
-  display: inline-block;
-  vertical-align: middle;
-  height: 100vh;
-}
-.v-center{
-  min-height: 100vh;
-  width: 100%;
-}
+
 </style>

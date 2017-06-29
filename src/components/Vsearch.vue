@@ -1,4 +1,5 @@
 <template>
+<div class="v-center">
 <div class="vsearch">
     <h1 >Vsearch</h1>
     <div>
@@ -18,6 +19,7 @@
             </ul>
         </div>
     </div>
+</div>
 </div>
 </template>
 <script>
@@ -53,6 +55,16 @@ export default{
 }
 </script>
 <style scoped>
+.v-center:before{
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100vh;
+}
+.v-center{
+  min-height: 100vh;
+  width: 100%;
+}
 .vsearch {
     width: 100%;
     background-color:#fff;
