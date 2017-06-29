@@ -2,7 +2,7 @@
     <div class="comment">
         <div class="comment-box">
             <div v-for="com in coms" class="msg-box">
-                <span class="msg-by">{{com.name}}</span>
+                <span class="msg-by" v-bind:style="{color: com.color}">{{com.name}}</span>
                 <span class="msg-text">{{com.message}}</span>
                 <small class="msg-time">{{com.time}}</small>
             </div>
@@ -12,6 +12,7 @@
             <div class="">
                 <form id="input-form">
                 <input type="text" v-model="com.name" class="round-input" placeholder="Enter your Name" required/>
+                <input type="color" v-model="com.color" value="#000000" class="round-input"/>
                 <textarea v-model="com.message" class="round-input" placeholder="Enter your Comment...." required="required"></textarea>
                 <button type="submit" v-on:click="addMsg" class="round-input">Send</button>
                 </form>
@@ -28,20 +29,32 @@ export default{
             com: {
                 name: null,
                 message: null,
-                time: null
+                time: null,
+                color: null
             },
             coms: [],
         }
     },
     methods: {
         addMsg: function () {
-            this.coms.push({
-                name: this.com.name,
-                message: this.com.message,
-                time: '11:29'
-            });
-            this.com.name = null;
-            this.com.message = null;
+            if(!this.validation()){
+                console.log('undefined fields available');
+            }else{
+                this.coms.push({
+                    name: this.com.name,
+                    message: this.com.message,
+                    time: '11:29',
+                    color: this.com.color
+                });
+                this.com.name = null;
+                this.com.message = null;
+            }
+        },
+        validation: function () {
+            if(this.com.name === null || this.com.message === null){
+                return false;
+            }
+            return true;
         }
 
     },
@@ -111,8 +124,14 @@ input[type="text"]{
     padding: 8px 15px;
     box-sizing: border-box;
 }
+input[type="color"]{
+    width: 3%;
+    float: left;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
 textarea{
-    width: 65%;
+    width: 60%;
     float: left;
     padding: 12px 20px;
     box-sizing: border-box;
