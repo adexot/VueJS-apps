@@ -12,7 +12,7 @@
             <div class="">
                 <form id="input-form">
                 <input type="text" v-model="com.name" class="round-input" placeholder="Enter your Name" required/>
-                <input type="color" v-model="com.color" value="#000000" class="round-input"/>
+                <input type="color" v-model="com.color" value="#000" class="round-input"/>
                 <textarea v-model="com.message" class="round-input" placeholder="Enter your Comment...." required="required"></textarea>
                 <button type="submit" v-on:click="addMsg" class="round-input">Send</button>
                 </form>
@@ -43,11 +43,13 @@ export default{
                 this.coms.push({
                     name: this.com.name,
                     message: this.com.message,
-                    time: '11:29',
+                    time: this.showTime(),
                     color: this.com.color
                 });
                 this.com.name = null;
                 this.com.message = null;
+                this.com.color = '#000000';
+                this.com.time = null;
             }
         },
         validation: function () {
@@ -55,6 +57,11 @@ export default{
                 return false;
             }
             return true;
+        },
+        showTime: function () {
+            let d = new Date();
+            let time = d.getHours() + ':' + d.getMinutes();
+            return time;
         }
 
     },
