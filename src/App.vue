@@ -1,19 +1,18 @@
 <template>
   <div id="app" class="">
-    <task></task>
+    <comment></comment>
   </div>
 </template>
 
 <script>
-import New from './components/New';
-import Hello from './components/Hello';
 import Vsearch from './components/Vsearch';
 import Task from './components/Task';
+import Comment from './components/Comment';
 
 export default {
   name: 'app',
   components: {
-    New,Hello,Vsearch,Task
+    Vsearch,Task,Comment
   },
   methods: {
     call: function(){
