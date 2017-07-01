@@ -1,25 +1,25 @@
 <template>
 <div class="v-center">
-<div class="vsearch">
-    <h1 >Vsearch</h1>
-    <div>
-        <h4  v-if="query">Query: <q>{{term}}</q></h4>
-        <input type="text" v-on:keypress="type" v-model="term" placeholder="Enter search querry here">
-        <input type="submit" v-on:click="searchTerm" value="Search"/>
-        
+    <div class="vsearch">
+        <h1 >Vsearch</h1>
+        <div>
+            <h4  v-if="query">Query: <q>{{term}}</q></h4>
+            <input type="text" v-on:keypress="type" v-model="term" placeholder="Enter search query here">
+            <input type="submit" v-on:click="searchTerm" value="Search">
+            
 
-        <div v-show="terms" class="list">
-            <h4 class="grey">Search Items</h4>
-            <ul>
-                <li v-for="term in reArray">
-                    <a class="bold red" v-on:click="del(term)">x</a>
-                    {{term.text}}
-                    <small class="text-right">{{term.time}}</small>
-                </li>
-            </ul>
+            <div v-show="terms" class="list">
+                <h4 class="grey">Search Items</h4>
+                <ul>
+                    <li v-for="term in reArray">
+                        <a class="bold red" v-on:click="del(term)">x</a>
+                        {{term.text}}
+                        <small class="text-right">{{term.time}}</small>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 </div>
 </template>
 <script>
@@ -36,7 +36,7 @@ export default{
         searchTerm: function () {
             this.terms.push({
                 text: this.term,
-                time: new Date().getTime()
+                time: this.showTime()
             });
         },
         type: function(e){
@@ -45,6 +45,11 @@ export default{
         },
         del: function(term){
             this.terms.splice(this.term.indexOf(term), 1);
+        },
+        showTime: function () {
+            let time = new Date();
+            let timeStr = time.getHours() + ":" + time.getMinutes();
+            return timeStr;
         }
     },
     computed: {
@@ -79,6 +84,7 @@ input{
 input[type="text"]{
    width: 500px;
    border-radius: 4px 0px 0px 4px;
+   outline: 0;
 }
 input[type="submit"]{
     margin-left: -5px;

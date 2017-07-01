@@ -1,25 +1,12 @@
 <template>
   <div id="app" class="">
-    <comment></comment>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Vsearch from './components/Vsearch';
-import Task from './components/Task';
-import Comment from './components/Comment';
-
 export default {
   name: 'app',
-  components: {
-    Vsearch,Task,Comment
-  },
-  methods: {
-    call: function(){
-      alert(1);
-    }
-  }
- 
 }
 </script>
 

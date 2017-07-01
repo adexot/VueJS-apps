@@ -1,18 +1,18 @@
 <template>
     <div class="comment">
         <div class="comment-box">
-            <div v-for="com in coms" class="msg-box">
+            <div v-for="com in coms" v-bind:key="com" class="msg-box">
                 <span class="msg-by" v-bind:style="{color: com.color}">{{com.name}}</span>
                 <span class="msg-text">{{com.message}}</span>
                 <small class="msg-time">{{com.time}}</small>
             </div>
         </div>
         <div class="input-box">
-            <h6 v-if="com.message">{{com.name}} is typing</h6>
+            <h6 v-if="com.message">{{com.name}} is typing...</h6>
             <div class="">
                 <form id="input-form">
-                <input type="text" v-model="com.name" class="round-input" placeholder="Enter your Name" required/>
-                <input type="color" v-model="com.color" value="#000" class="round-input"/>
+                <input type="text" v-model="com.name" class="round-input" placeholder="Enter your Name" required>
+                <input type="color" v-model="com.color" value="#000" class="round-input">
                 <textarea v-model="com.message" class="round-input" placeholder="Enter your Comment...." required="required"></textarea>
                 <button type="submit" v-on:click="addMsg" class="round-input">Send</button>
                 </form>
@@ -94,6 +94,17 @@ export default{
     max-width: 70%;
     margin: 10px;
     border-radius: 4px;
+}
+.msg-box:before{
+    content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    left: -5px;
+    background-color: #fff;
+    top: 3px;
+    transform: rotate(60deg);
+    z-index: 0;
 }
 .msg-by{
     display: block;
